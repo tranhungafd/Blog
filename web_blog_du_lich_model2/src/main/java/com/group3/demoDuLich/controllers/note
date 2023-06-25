@@ -1,0 +1,1 @@
+- Spring Boot - thiết ke web- Mysql: CSDL- JPA - ORM: giúp lập trình viên mapping giữa bảng trong CSDL với Đối tượng trong java=> viết code nhanh hơn.- Spring security: cơ bản: + xác thực: đăng nhập                           + phân quyền: tài khoản đăng nhập đó có quền gì.- view:

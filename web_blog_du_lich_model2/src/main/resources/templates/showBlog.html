@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/54f0cb7e4a.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+
+    <title>Single Post</title>
+    <link rel="stylesheet" href="/dalat.css">
+    <style>
+        .comment-box {
+
+            padding: 5px;
+        }
+
+
+        .comment-area textarea {
+            resize: none;
+            border: 1px solid #ad9f9f;
+        }
+
+
+        .form-control:focus {
+            color: #495057;
+            background-color: #fff;
+            border-color: #ffffff;
+            outline: 0;
+            box-shadow: 0 0 0 1px rgb(255, 0, 0) !important;
+        }
+
+        .send {
+            color: #fff;
+            background-color: #ff0000;
+            border-color: #ff0000;
+        }
+
+        .send:hover {
+            color: #fff;
+            background-color: #f50202;
+            border-color: #f50202;
+        }
+
+
+        .rating {
+            display: flex;
+            margin-top: -10px;
+            flex-direction: row-reverse;
+            margin-left: 5px;
+            float: left;
+        }
+
+        .rating > input {
+            display: none;
+        }
+
+        .rating > label {
+            position: relative;
+            width: 19px;
+            color: #ff0000;
+            cursor: pointer;
+
+        }
+
+        .rating > label::before {
+            content: "\2605";
+            position: absolute;
+            opacity: 0
+
+        }
+
+        .rating > label:hover:before,
+        .rating > label:hover ~ label:before {
+            opacity: 1 !important
+        }
+
+        .rating > input:checked ~ label:before {
+            opacity: 1
+        }
+
+        .rating:hover > input:checked ~ label:before {
+            opacity: 0.4
+        }
+    </style>
+</head>
+<body>
+<!-- header -->
+<header class="narbar">
+    <div class="narbar">
+        <ul>
+            <li>
+                <a href="/">Home</a>
+            </li>
+            <li>
+                <a href="/vechungtoi">Về chúng tôi</a>
+            </li>
+            <li>
+                <a href="/blogs/1">Review địa điểm</a>
+            </li>
+            <li>
+                <a href="/blogs/2">Review ẩm thực</a>
+            </li>
+            <li>
+                <a href="/dichvu">24/7</a>
+            </li>
+            <li>
+                <a href="/guidebook">Guiledbook</a>
+            </li>
+        </ul>
+    </div>
+    <div class="hero__section">
+        <div class="hero__text">
+            <h1>WEB REVIEW</h1>
+            <p> Chuyên review địa điểm du lịch và thức ăn</p>
+        </div>
+    </div>
+</header>
+
+
+<!-- -----Content------ -->
+<div class="content clearfix">
+    <!-- Main content -->
+    <div class="main-content single">
+        <h1 class="post-title" th:text="${blog.title}"></h1>
+
+
+        <div class="post-content">
+            <p th:text="${blog.summary}"></p>
+            <img th:src="${blog.images[0].url}" width="100%" alt="">
+
+            <p th:text="${blog.content}"></p>
+        </div>
+    </div>
+
+
+    <!-- Main content -->
+    <div class="sidebar single">
+
+
+        <div class="section popular">
+            <h2 class="section-title">Popular</h2>
+
+            <div class="post clearfix" th:each="blog : ${blogs1_5}">
+                <img th:src="${blog.images[0].url}" alt="">
+                <a th:href="@{/blog/{id} (id=${blog.id})}" class="title"><h4 th:text="${blog.title}"></h4></a>
+                <p th:text="${blog.date + ' - ' + blog.view + ' view'}"></p>
+            </div>
+
+
+        </div>
+        <div class="section topics">
+            <h2 class="section-title">Topics</h2>
+            <ul>
+                <li><a href="/blogs/2">Review ẩm thực</a></li>
+                <li><a href="/blogs/1">Review du lịch</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<br>
+<!--Comment-->
+<div th:each="comment : ${blog.comments}">
+    <hr>
+    <br>
+    <div class="row container">
+        <div class="col-2">
+            <img style="margin-left: 70%" th:src="${comment.user.img}" width="50" class="rounded-circle mt-2">
+        </div>
+        <div class="col-10">
+            <div class="comment-box ml-2">
+                <h4 th:text="${comment.user.username}"></h4>
+                <div class="rating" th:if="${comment.count == 5}">
+                    <div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 70 70">
+                            <polygon points="35 2 43 25 67 25 47 40 53 63 35 50 17 63 23 40 3 25 27 25" fill="red" stroke="black" stroke-width="1"/>
+                        </svg>
+
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 70 70">
+                            <polygon points="35 2 43 25 67 25 47 40 53 63 35 50 17 63 23 40 3 25 27 25" fill="red" stroke="black" stroke-width="1"/>
+                        </svg>
+
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 70 70">
+                            <polygon points="35 2 43 25 67 25 47 40 53 63 35 50 17 63 23 40 3 25 27 25" fill="red" stroke="black" stroke-width="1"/>
+                        </svg>
+
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 70 70">
+                            <polygon points="35 2 43 25 67 25 47 40 53 63 35 50 17 63 23 40 3 25 27 25" fill="red" stroke="black" stroke-width="1"/>
+                        </svg>
+
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 70 70">
+                            <polygon points="35 2 43 25 67 25 47 40 53 63 35 50 17 63 23 40 3 25 27 25" fill="red" stroke="black" stroke-width="1"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="rating" th:if="${comment.count == 4}">
+                    <div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 70 70">
+                            <polygon points="35 2 43 25 67 25 47 40 53 63 35 50 17 63 23 40 3 25 27 25" fill="red" stroke="black" stroke-width="1"/>
+                        </svg>
+
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 70 70">
+                            <polygon points="35 2 43 25 67 25 47 40 53 63 35 50 17 63 23 40 3 25 27 25" fill="red" stroke="black" stroke-width="1"/>
+                        </svg>
+
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 70 70">
+                            <polygon points="35 2 43 25 67 25 47 40 53 63 35 50 17 63 23 40 3 25 27 25" fill="red" stroke="black" stroke-width="1"/>
+                        </svg>
+
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 70 70">
+                            <polygon points="35 2 43 25 67 25 47 40 53 63 35 50 17 63 23 40 3 25 27 25" fill="red" stroke="black" stroke-width="1"/>
+                        </svg>
+
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 70 70">
+                            <polygon points="35 2 43 25 67 25 47 40 53 63 35 50 17 63 23 40 3 25 27 25" fill="white" stroke="black" stroke-width="1"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="rating" th:if="${comment.count == 3}">
+                    <div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 70 70">
+                            <polygon points="35 2 43 25 67 25 47 40 53 63 35 50 17 63 23 40 3 25 27 25" fill="red" stroke="black" stroke-width="1"/>
+                        </svg>
+
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 70 70">
+                            <polygon points="35 2 43 25 67 25 47 40 53 63 35 50 17 63 23 40 3 25 27 25" fill="red" stroke="black" stroke-width="1"/>
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 70 70">
+                            <polygon points="35 2 43 25 67 25 47 40 53 63 35 50 17 63 23 40 3 25 27 25" fill="red" stroke="black" stroke-width="1"/>
+                        </svg>
+
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 70 70">
+                            <polygon points="35 2 43 25 67 25 47 40 53 63 35 50 17 63 23 40 3 25 27 25" fill="white" stroke="black" stroke-width="1"/>
+                        </svg>
+
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 70 70">
+                            <polygon points="35 2 43 25 67 25 47 40 53 63 35 50 17 63 23 40 3 25 27 25" fill="white" stroke="black" stroke-width="1"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="rating" th:if="${comment.count == 2}">
+                    <div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 70 70">
+                            <polygon points="35 2 43 25 67 25 47 40 53 63 35 50 17 63 23 40 3 25 27 25" fill="red" stroke="black" stroke-width="1"/>
+                        </svg>
+
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 70 70">
+                            <polygon points="35 2 43 25 67 25 47 40 53 63 35 50 17 63 23 40 3 25 27 25" fill="red" stroke="black" stroke-width="1"/>
+                        </svg>
+
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 70 70">
+                            <polygon points="35 2 43 25 67 25 47 40 53 63 35 50 17 63 23 40 3 25 27 25" fill="white" stroke="black" stroke-width="1"/>
+                        </svg>
+
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 70 70">
+                            <polygon points="35 2 43 25 67 25 47 40 53 63 35 50 17 63 23 40 3 25 27 25" fill="white" stroke="black" stroke-width="1"/>
+                        </svg>
+
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 70 70">
+                            <polygon points="35 2 43 25 67 25 47 40 53 63 35 50 17 63 23 40 3 25 27 25" fill="white" stroke="black" stroke-width="1"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="rating" th:if="${comment.count == 1}">
+                    <div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 70 70">
+                            <polygon points="35 2 43 25 67 25 47 40 53 63 35 50 17 63 23 40 3 25 27 25" fill="red" stroke="black" stroke-width="1"/>
+                        </svg>
+
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 70 70">
+                            <polygon points="35 2 43 25 67 25 47 40 53 63 35 50 17 63 23 40 3 25 27 25" fill="white" stroke="black" stroke-width="1"/>
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 70 70">
+                            <polygon points="35 2 43 25 67 25 47 40 53 63 35 50 17 63 23 40 3 25 27 25" fill="white" stroke="black" stroke-width="1"/>
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 70 70">
+                            <polygon points="35 2 43 25 67 25 47 40 53 63 35 50 17 63 23 40 3 25 27 25" fill="white" stroke="black" stroke-width="1"/>
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 70 70">
+                            <polygon points="35 2 43 25 67 25 47 40 53 63 35 50 17 63 23 40 3 25 27 25" fill="white" stroke="black" stroke-width="1"/>
+                        </svg>
+                    </div>
+                </div>
+                <div class="rating" th:if="${comment.count == 0}">
+                    <div>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 70 70">
+                            <polygon points="35 2 43 25 67 25 47 40 53 63 35 50 17 63 23 40 3 25 27 25" fill="white" stroke="black" stroke-width="1"/>
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 70 70">
+                            <polygon points="35 2 43 25 67 25 47 40 53 63 35 50 17 63 23 40 3 25 27 25" fill="white" stroke="black" stroke-width="1"/>
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 70 70">
+                            <polygon points="35 2 43 25 67 25 47 40 53 63 35 50 17 63 23 40 3 25 27 25" fill="white" stroke="black" stroke-width="1"/>
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 70 70">
+                            <polygon points="35 2 43 25 67 25 47 40 53 63 35 50 17 63 23 40 3 25 27 25" fill="white" stroke="black" stroke-width="1"/>
+                        </svg>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" viewBox="0 0 70 70">
+                            <polygon points="35 2 43 25 67 25 47 40 53 63 35 50 17 63 23 40 3 25 27 25" fill="white" stroke="black" stroke-width="1"/>
+                        </svg>
+                    </div>
+                </div>
+                <br>
+                <br>
+
+                <div>
+                    <p th:text="${comment.content}"></p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<!--Viết comment-->
+<hr>
+<br>
+<form th:action="@{/comment/{id} (id=${blog.id})}" method="post">
+    <div class="row container">
+
+        <div class="col-2">
+            <img style="margin-left: 50%" src="https://i.imgur.com/xELPaag.jpg" width="70" class="rounded-circle mt-2">
+        </div>
+        <div class="col-10">
+            <div class="comment-box ml-2">
+                <h4>Add a comment</h4>
+                <div class="rating">
+                    <input type="radio" name="rating" value="5" id="5"><label for="5">☆</label>
+                    <input type="radio" name="rating" value="4" id="4"><label for="4">☆</label>
+                    <input type="radio" name="rating" value="3" id="3"><label for="3">☆</label>
+                    <input type="radio" name="rating" value="2" id="2"><label for="2">☆</label>
+                    <input type="radio" name="rating" value="1" id="1"><label for="1">☆</label>
+                </div>
+                <div class="comment-area">
+                    <textarea name="content" class="form-control" placeholder="what is your view?" rows="4"></textarea>
+                </div>
+                <div class="comment-btns mt-2">
+                    <div class="row">
+                        <div class="col-6">
+                            <div class="pull-left">
+                                <button type="submit" class="btn btn-success btn-sm">Comment</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+
+    </div>
+</form>
+<!-- -----------Footer------------ -->
+<footer class="footer">
+    <div class="footer-content">
+        <h3>Welcome to our Blog</h3>
+        <p>
+
+            Với sứ mệnh Chia Sẻ Kinh nghiệm Du lịch cho cộng đồng du lịch Việt Nam, chuyên sâu là những kinh nghiệm thực tế, review thật, trải nghiệm thật.
+            Mục đích giúp mọi người đều có thể đi Du Lịch Tự Túc một cách dễ dàng.
+
+        </p>
+        <ul class="socials">
+            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+            <li><a href="https://www.youtube.com/c/AndyNguyen"><i class="fa fa-youtube"></i></a></li>
+            <li><a href="#"><i class="fa fa-linkedin-square"></i></a></li>
+        </ul>
+    </div>
+    <div class="footer-bottom">
+        <p>copyright &copy;2023 codeOpacity. designed by <span>Quang Vũ</span></p>
+    </div>
+</footer>
+</body>
+</html>

@@ -1,0 +1,89 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FOODTOUR</title>
+  <link rel="stylesheet" href="/foodtourr.css">
+  <link rel="stylesheet" href="/bootstrap-grid.css">
+</head>
+<body>
+<header class="narbar">
+  <div class="narbar">
+    <ul>
+      <li>
+        <a href="/">Home</a>
+      </li>
+      <li>
+        <a href="/vechungtoi">Về chúng tôi</a>
+      </li>
+      <li>
+        <a href="/blogs/1">Review địa điểm</a>
+      </li>
+      <li>
+        <a href="/blogs/2">Review ẩm thực</a>
+      </li>
+      <li>
+        <a href="/dichvu">24/7</a>
+      </li>
+      <li>
+        <a href="/guidebook">Guiledbook</a>
+      </li>
+    </ul>
+  </div>
+  <div class="hero__section">
+    <div class="hero__text">
+      <h1>WEB REVIEW</h1>
+      <p> Chuyên review địa điểm du lịch và thức ăn</p>
+    </div>
+  </div>
+</header>
+<!-- Recipe__section -->
+<div class="recipe__section">
+  <div class="container">
+    <div class="row recipe__row">
+
+      <div class="col-md-4" th:each="blog : ${blogs}">
+        <a th:href="@{/blog/{id} (id=${blog.id})}">
+          <div class="image__wrapper">
+            <img th:src="${blog.images[0].url}" alt="">
+            <div class="image__wrapper-text">
+              <h5 th:text="${blog.view} + ' views'"></h5>
+              <p th:text="${blog.summary}"></p>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+<div class="about__section"></div>
+<div class="extra__section"></div>
+<div class="subcribe__section"></div>
+<!-- -----------Footer------------ -->
+<footer class="footer">
+  <div class="footer-content">
+    <h3>Welcome to our Blog</h3>
+    <p>
+
+      Với sứ mệnh Chia Sẻ Kinh nghiệm Du lịch cho cộng đồng du lịch Việt Nam, chuyên sâu là những kinh nghiệm thực tế, review thật, trải nghiệm thật.
+      Mục đích giúp mọi người đều có thể đi Du Lịch Tự Túc một cách dễ dàng.
+
+    </p>
+    <ul class="socials">
+      <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+      <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+      <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+      <li><a href="https://www.youtube.com/c/AndyNguyen"><i class="fa fa-youtube"></i></a></li>
+      <li><a href="#"><i class="fa fa-linkedin-square"></i></a></li>
+    </ul>
+  </div>
+  <div class="footer-bottom">
+    <p>copyright &copy;2023 codeOpacity. designed by <span>Quang Vũ</span></p>
+  </div>
+</footer>
+</body>
+</html>

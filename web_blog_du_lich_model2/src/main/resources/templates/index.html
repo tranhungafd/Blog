@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/54f0cb7e4a.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="./font/fontawesome-free-6.4.0/css/all.min.css">
+    <title>Home</title>
+    <style>
+        .form-input, .form button {
+
+            height: 35px;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="header-top">
+        <i class="fa-solid fa-bars"></i>
+        <ul>
+            <li style="--x:1;"><a href="/">Trang chủ</a></li>
+            <li style="--x:2;"><a href="/blogs/1"> Review Địa điểm</a></li>
+            <li style="--x:3;"><a href="/vechungtoi">Về chúng tôi</a></li>
+            <li style="--x:4;"><a href="/blogs/2">Review ẩm thực</a></li>
+            <li style="--x:4;"><a href="/logout" onclick="return confirm('Bạn có chắc chắn đăng xuất');" class="text-danger pt-4 d-block">Đăng xuất</a></li>
+        </ul>
+    </div>
+    <div class="video-container" style="height: 70vh">
+        <video src="Video/Videonen .mp4" autoplay muted loop></video>
+    </div>
+    <div class="header-content" style="font-size: 25px;width: 760px; left: 27%; top: 30%; color: lightgreen">
+        <h1>Chào Mừng Bạn Đã Đến Với Trang Web Review Du Lịch</h1>
+        <p>Xách ba lô lên và đi nào </p>
+        <br>
+        <div th:if="${!authentication.getPrincipal().toString().equals('anonymousUser')}">
+            <h3 style="color: lightgreen">Chào mừng <a style="color: red"
+                                                       th:href="@{/user/{username} (username=${authentication.principal.username})}"
+                                                       th:text="${authentication.principal.username}"></a> đến với trang
+                web!</h3>
+        </div>
+        <div th:if="${authentication.getPrincipal().toString().equals('anonymousUser')}">
+            <h1><a href="/login" class="btn btn-primary"
+                   style="padding:10px;background: #ff860d;font-size: 23px; width: auto; height: auto">Tham Gia Ngay</a>
+            </h1>
+
+        </div>
+    </div>
+</header>
+<form action="/search" method="get">
+<div style="position: absolute; top:5px; left: 100px; width: 500px">
+    <div class="row height d-flex justify-content-center align-items-center">
+        <div class="col-md-6">
+            <div class="form">
+<!--                <i class="fa fa-search"></i>-->
+                <input name="title" type="text" class="form-control form-input" placeholder="Search anything...">
+                <button type="submit" style="position: absolute;left: 160px;top: -20px;">Search</button>
+            </div>
+        </div>
+    </div>
+
+</div>
+</form>
+<!-----------------NICE-PLACE------------>
+<section class="nice-place">
+    <div class="container">
+        <h1 class="h1-style">Địa Điểm Nổi Bật</h1>
+        <div class="nice-place-content row">
+            <div class="nice-place-item" th:each="blog : ${blogs1_3}">
+                <div class="nice-place-img">
+                    <img th:src="${blog.images[0].url}" alt="">
+                </div>
+                <div class="nice-place-text">
+                    <h2 th:text="${blog.title}">Tour Đà Lạt</h2>
+                    <i class="fa-sharp fa-solid fa-star"></i>
+                    <i class="fa-sharp fa-solid fa-star"></i>
+                    <i class="fa-sharp fa-solid fa-star"></i>
+                    <i class="fa-sharp fa-solid fa-star"></i>
+                    <i class="fa-sharp fa-solid fa-star"></i>
+                    <p th:text="${blog.view} + ' views'"></p>
+                    <a th:href="@{blog/{id} (id=${blog.id})}">
+                        <button class="btn">Đọc Thêm</button>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+        <br>
+        <div class="nice-place-content row">
+            <div class="nice-place-item" th:each="blog : ${blogs3_6}">
+                <div class="nice-place-img">
+                    <img th:src="${blog.images[0].url}" alt="">
+                </div>
+                <div class="nice-place-text">
+                    <h2 th:text="${blog.title}">Tour Đà Lạt</h2>
+                    <i class="fa-sharp fa-solid fa-star"></i>
+                    <i class="fa-sharp fa-solid fa-star"></i>
+                    <i class="fa-sharp fa-solid fa-star"></i>
+                    <i class="fa-sharp fa-solid fa-star"></i>
+                    <i class="fa-sharp fa-solid fa-star"></i>
+                    <p th:text="${blog.view} + ' views'"></p>
+                    <a th:href="@{blog/{id} (id=${blog.id})}">
+                        <button class="btn">Đọc Thêm</button>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+
+    </div>
+
+</section>
+<!-- VIDEO 3: ABOUT -->
+<section class="about">
+    <div class="container">
+        <h1 class="h1-style">Về chúng tôi</h1>
+        <div class="about-content row">
+            <div class="about-content-left">
+                <img src="image/about.jpg" alt="">
+            </div>
+            <div class="about-content-right">
+                <h2>Tại sao bạn nên chọn chúng tôi?</h2>
+                <p>Chúng tôi là công ty hàng đầu về cung cấp dịch vụ lữ hành và quốc tế hàng đầu Việt Nam</p>
+                <button class="btn"><a href="/vechungtoi">Tìm hiểu thêm</a></button>
+            </div>
+        </div>
+        <!-- ------------Ẩm thực, dịch vụ, guild tour------------ -->
+        <div class="service row">
+            <div class="service-item">
+                <img src="image/house.png" alt="">
+                <p><a href="/blogs/2"> Review ẩm thực</a></p>
+            </div>
+            <div class="service-item">
+                <img src="image/client.png" alt="">
+                <p><a href="/dichvu"> Dịch vụ 24/7 </a></p>
+            </div>
+            <div class="service-item">
+                <img src="image/user-guide.png" alt="">
+                <p><a href="/guidebook"> Guide book</a></p>
+            </div>
+        </div>
+    </div>
+    </div>
+</section>
+<!-- -----------------Tour 2023 -------------------->
+<section class="tour">
+    <div class="container">
+        <h1 class="h1-style">Tour hè 2023</h1>
+        <div class="tour-content-item row">
+            <div class="tour-content-item-img">
+                <img src="image/2-1662873807.jpg" alt="">
+            </div>
+            <div class="tour-content-item-text">
+                <h2>Đà Lạt</h2>
+                <p>Đà Lạt là thành phố tỉnh lỵ của tỉnh Lâm Đồng,nằm trên cao nguyên Lâm Viên,thuộc vùng Tây Nguyên,</p>
+                <button class="btn"><a href="/dalat"> Khám phá</a></button>
+            </div>
+        </div>
+        <div class="tour-content-item row">
+            <div class="tour-content-item-img">
+                <img src="image/download.jpg" alt="">
+            </div>
+            <div class="tour-content-item-text">
+                <h2>Hội An</h2>
+                <p>Hội An là một thành phố trực thuộc tỉnh Quảng Nam, Việt Nam. Phố cổ Hội An từng là một thương cảng
+                    quốc tế sầm uất, gồm những di sản kiến trúc đã có từ hàng trăm năm trước, được UNESCO công nhận là
+                    di sản văn hóa thế giới từ năm 1999.</p>
+                <button class="btn"><a href="/hoian">Khám phá</a></button>
+            </div>
+        </div>
+        <div class="tour-content-item row">
+            <div class="tour-content-item-img">
+                <img src="image/download (1).jpg" alt="">
+            </div>
+            <div class="tour-content-item-text">
+                <h2>Hồ Chí Minh</h2>
+                <p>Thành phố Hồ Chí Minh (thường được gọi là Sài Gòn) là thành phố lớn nhất của Việt Nam. Đây là nơi có
+                    nhiều cơ hội việc làm và thu hút đông đảo du khách từ khắp nơi trên thế giới. Thành phố có nhiều
+                    điểm tham quan du lịch nổi tiếng như Chợ Bến Thành, Dinh Độc Lập, Nhà hát Thành phố Hồ Chí Minh và
+                    Bảo tàng Mỹ thuật.</p>
+                <button class="btn"><a href="/hochiminh">Khám phá</a></button>
+            </div>
+        </div>
+        <div class="tour-content-item row">
+            <div class="tour-content-item-img">
+                <img src="image/Tour-du-lịch-Dà-Nẵng-_-Du-lịch-Lion-Trip.png" alt="">
+            </div>
+            <div class="tour-content-item-text">
+                <h2>Đà Nẵng</h2>
+                <p>Đà Nẵng là thành phố thuộc miền Trung Việt Nam, nằm ở vị trí trung tâm của cả nước. Đây là một trong
+                    những thành phố phát triển nhanh nhất của Việt Nam với nhiều cơ hội kinh doanh, đầu tư và du lịch.
+                    Đà Nẵng có diện tích khoảng 1.285 km² và dân số khoảng 1,2 triệu người.</p>
+                <button class="btn"><a href="/danang">Khám phá</a></button>
+            </div>
+        </div>
+</section>
+<!-- ----------------Video 6: Review ----------------- -->
+<section class="review">
+    <div class="container">
+        <h1 class="h1-style">Phản hồi</h1>
+        <div class="review-content row">
+            <div class="review-item">
+                <div class="review-item-text">
+                    <img src="image/quotes.png" alt="">
+                    <p><span>&ldquo;</span>Đà Lạt là thành phố tỉnh lỵ của tỉnh Lâm Đồng,nằm trên cao nguyên Lâm
+                        Viên,thuộc vùng Tây Nguyên<span>&rdquo;</span></p>
+                </div>
+                <div class="review-item-img row">
+                    <img src="image/Mailovesbeauty Hue Review 1.jpg" alt="">
+                    <div class="review-item-img-text">
+                        <h2>Ngô Sỹ Nguyên</h2>
+                        <p>Ngày 12/4/2023</p>
+                    </div>
+                </div>
+            </div>
+            <div class="review-item">
+                <div class="review-item-text">
+                    <img src="image/quotes.png" alt="">
+                    <p><span>&ldquo;</span>Đà Lạt là thành phố tỉnh lỵ của tỉnh Lâm Đồng,nằm trên cao nguyên Lâm
+                        Viên,thuộc vùng Tây Nguyên,</p>
+                </div>
+                <div class="review-item-img row">
+                    <img src="image/du-lich-ninh-binh-ivivu-1.jpg" alt="">
+                    <div class="review-item-img-text">
+                        <h2>Ngô Sỹ Nguyên</h2>
+                        <p>Ngày 12/4/2023</p>
+                    </div>
+                </div>
+            </div>
+            <div class="review-item">
+                <div class="review-item-text">
+                    <img src="image/quotes.png" alt="">
+                    <p><span>&ldquo;</span>Đà Lạt là thành phố tỉnh lỵ của tỉnh Lâm Đồng,nằm trên cao nguyên Lâm
+                        Viên,thuộc vùng Tây Nguyên,</p>
+                </div>
+                <div class="review-item-img row">
+                    <img src="image/review-kinh-nghiem-du-lich-con-dao-tu-tuc-04.jpg" alt="">
+                    <div class="review-item-img-text">
+                        <h2>Ngô Sỹ Nguyên</h2>
+                        <p>Ngày 12/4/2023</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- -----------Footer------------ -->
+<footer class="footer">
+    <div class="footer-content">
+        <h3>Welcome to our Blog</h3>
+        <p>
+
+        Với sứ mệnh Chia Sẻ Kinh nghiệm Du lịch cho cộng đồng du lịch Việt Nam, chuyên sâu là những kinh nghiệm thực tế, review thật, trải nghiệm thật.
+        Mục đích giúp mọi người đều có thể đi Du Lịch Tự Túc một cách dễ dàng.
+
+        </p>
+        <ul class="socials">
+            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+            <li><a href="https://www.youtube.com/c/AndyNguyen"><i class="fa fa-youtube"></i></a></li>
+            <li><a href="#"><i class="fa fa-linkedin-square"></i></a></li>
+        </ul>
+    </div>
+    <div class="footer-bottom">
+        <p>copyright &copy;2023 codeOpacity. designed by <span>Quang Vũ</span></p>
+    </div>
+</footer>
+</section>
+<script src="script.js"></script>
+</body>
+</html>

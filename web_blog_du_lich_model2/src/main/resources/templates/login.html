@@ -1,0 +1,36 @@
+
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://kit.fontawesome.com/54f0cb7e4a.js" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="./font/fontawesome-free-6.4.0/css/all.min.css">
+  <title>Document</title>
+</head>
+<body>
+<header>
+  <div class="video-container">
+    <video src="Video/Videonen .mp4" autoplay muted loop></video>
+  </div>
+  <div class="header-content">
+    <h1>Trải nghiệm đáng nhớ</h1>
+    <p>Xách ba lô lên và đi nào </p>
+    <form action="/login" method="post">
+      <h1> Đăng Nhập </h1>
+      <p>UserName</p>
+      <input name="username" type="text">
+      <p>Password</p>
+      <input name="password" type="password">
+      <button type="submit">Đăng Nhập</button>
+      <br><br>
+      <a style="font-size: 13px" href="/register">Đăng ký tài khoản</a>
+    </form>
+  </div>
+</header>
+
+<script src="script.js"></script>
+</body>
+</html>

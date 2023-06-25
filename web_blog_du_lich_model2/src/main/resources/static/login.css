@@ -1,0 +1,48 @@
+/* Styles for the login form */
+.card {
+    margin-top: 50px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+}
+.card-header {
+    background-color: #4267B2;
+    color: white;
+    padding: 20px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+.card-body {
+    padding: 20px;
+}
+.form-control:focus {
+    border-color: #4267B2;
+    box-shadow: none;
+}
+.btn-primary {
+    background-color: #4267B2;
+    border-color: #4267B2;
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+}
+.btn-primary:hover {
+    background-color: #365899;
+    border-color: #365899;
+}
+.alert-danger {
+    background-color: #ffe3e3;
+    border-color: #ffc9c9;
+    color: #721c24;
+}
+.alert-success {
+    background-color: #d4edda;
+    border-color: #c3e6cb;
+    color: #155724;
+}
+.alert {
+    margin-top: 20px;
+    border-radius: 10px;
+    padding: 10px;
+    font-size: 16px;
+}
